@@ -1,0 +1,10 @@
+mat-toolbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 25px;
+    color: #000;
+    background: #fff;
+    box-shadow: 0 0 20px rgb(89 102 122 / 10%);
+}

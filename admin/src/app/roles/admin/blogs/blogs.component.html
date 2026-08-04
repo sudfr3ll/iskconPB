@@ -1,0 +1,63 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Blogs</h5>
+                    <button (click)="addNewBlog()"  [disabled]="showHeader">Add</button>
+                </div>
+                <form class="form theme-form" *ngIf="blogs">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, blogs)" [(ngModel)]="indeterminate"
+                                        [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                                </th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Title</th>
+                                <!-- <th scope="col">Created at</th> -->
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let blog of blogs; let i= index">
+                                <td>
+                                    <mat-checkbox (change)="onSelectCheckBox($event, blog, blogs)" class="tp-margin"
+                                        [ngModelOptions]="{standalone: true}" [(ngModel)]="blog.checked" id="{{ blog.id }}">
+                                    </mat-checkbox>
+                                </td>
+                                <td>
+                                    <img [src]="getImage(blog)" />
+                                </td>
+                                <td>{{blog.title }}</td>
+                                <td>
+                                    <i class="material-icons edit-btn" (click)="editBlog(blog)">edit</i>
+                                </td>
+
+                                <td>
+                                    <mat-icon class="deleteIcon" (click)="deleteBlog(blog.id)">delete</mat-icon>
+                                </td>
+                                <!-- <i class="material-icons">delete</i> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+    <div class="cross" (click)="onClickCross(blogs)"><mat-icon class="closeIcon">close</mat-icon></div>
+    <div class="totalSelection">{{count}} selected</div>
+    <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span
+            class="deleteButton_header">Delete</span>
+    </div>
+</div>

@@ -1,0 +1,32 @@
+<div class="close-dialog">
+    <h1 mat-dialog-title>Subscription</h1>
+    <mat-icon (click)="closeDialog()">close</mat-icon>
+    </div>
+    <div mat-dialog-content>
+    <div class="enquiry-box">
+
+        <mat-label>Name</mat-label>
+        <h3>{{subscription.subscription.name}}</h3>
+
+        <mat-label *ngIf="subscription.payment.mode">Payment Mode</mat-label>
+        <h3>{{subscription.payment.mode}}</h3>
+
+        <mat-label>Magazine Name</mat-label>
+        <h3 *ngIf="subscription.magazineName">{{subscription.magazineName}}</h3>
+        <h3 *ngIf="!subscription.magazineName">N/A</h3>
+      
+
+        <h2>User Details</h2>
+        <mat-label>Name</mat-label>
+        <h3>{{subscription.user.name}}</h3>
+        <mat-label>Email</mat-label>
+        <h3>{{subscription.user.email}}</h3>
+        <mat-label>Phone</mat-label>
+        <h3>{{subscription.user.phoneNo}}</h3>
+        <mat-label>Address</mat-label>
+        <!-- <p>{{subscription.address}}</p> -->
+
+        <p *ngIf="subscription.user.address">{{subscription.user.address}}</p>
+        <p *ngIf="!subscription.user.address">N/A</p>
+    </div>
+    </div>

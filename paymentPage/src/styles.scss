@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+.spinnerContainer {
+    .absoluteSpinner {
+      position: absolute;
+      height: 110vh;
+      top: 0;
+      right: 0;
+      z-index: 999;
+      left: 0;
+      // backdrop-filter: blur(10px);
+      background-color: rgba(0, 0, 0, 0.186);
+    }
+  
+    #loader {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+  
+  .loaderText{
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    width: 286px;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    font-family: sans-serif;
+  }

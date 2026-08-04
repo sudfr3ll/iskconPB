@@ -1,0 +1,163 @@
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Social Media</h5>
+        </div>
+        <form class="form theme-form" *ngIf="data">
+          <div class="row">
+            <h4>Facebook</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Url</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="facebookUrl"
+                  type="text"
+                  name="facebookUrl"
+                  placeholder="Url"
+                  autocomplete="off"
+                  [(ngModel)]="data.facebook.url"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100 followers" fxFlex>
+                <mat-label>Followers</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="facebookFollowers"
+                  type="text"
+                  name="facebookFollowers"
+                  placeholder="Followers"
+                  autocomplete="off"
+                  [(ngModel)]="data.facebook.followers"
+                />
+              </mat-form-field>
+            </div>
+            <h4>Instagram</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Url</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="instagramUrl"
+                  type="text"
+                  name="instagramUrl"
+                  placeholder="Url"
+                  autocomplete="off"
+                  [(ngModel)]="data.instagram.url"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100 followers" fxFlex>
+                <mat-label>Followers</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="instagramFollowers"
+                  type="text"
+                  name="instagramFollowers"
+                  placeholder="Followers"
+                  autocomplete="off"
+                  [(ngModel)]="data.instagram.followers"
+                />
+              </mat-form-field>
+            </div>
+            <h4>Website</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Url</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="websiteUrl"
+                  type="text"
+                  name="websiteUrl"
+                  placeholder="Url"
+                  autocomplete="off"
+                  [(ngModel)]="data.onWebsite.url"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100 followers" fxFlex>
+                <mat-label>Followers</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="websiteFollowers"
+                  type="text"
+                  name="websiteFollowers"
+                  placeholder="Followers"
+                  autocomplete="off"
+                  [(ngModel)]="data.onWebsite.followers"
+                />
+              </mat-form-field>
+            </div>
+            <h4>Twitter</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Url</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="twitterUrl"
+                  type="text"
+                  name="twitterUrl"
+                  placeholder="Url"
+                  autocomplete="off"
+                  [(ngModel)]="data.twitter.url"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100 followers" fxFlex>
+                <mat-label>Followers</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="twitterFollowers"
+                  type="text"
+                  name="twitterFollowers"
+                  placeholder="Followers"
+                  autocomplete="off"
+                  [(ngModel)]="data.twitter.followers"
+                />
+              </mat-form-field>
+            </div>
+            <h4>Youtube</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Url</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="youtubeUrl"
+                  type="text"
+                  name="youtubeUrl"
+                  placeholder="Url"
+                  autocomplete="off"
+                  [(ngModel)]="data.youtube.url"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100 followers" fxFlex>
+                <mat-label>Followers</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="youtubeFollowers"
+                  type="text"
+                  name="youtubeFollowers"
+                  placeholder="Followers"
+                  autocomplete="off"
+                  [(ngModel)]="data.youtube.followers"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="card-footer">
+          <button mat-button (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

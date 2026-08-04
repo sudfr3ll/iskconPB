@@ -1,0 +1,43 @@
+<!-- <body>
+    <div class="background_img_container">
+      <div class="back_img">
+        <img src="../../assets/donationBanner.jpg" alt="">
+      </div>
+      <div class="opacity"></div>
+  
+      <div class="img_container"><img src="../assets/god.png" alt=""></div>
+    </div>
+    <div class="container">
+      <div class="content">
+        <form action="#">
+          <div class="user-details">
+            <div class="input-box">
+              <span class="details">Amount</span>
+              <input type="number" name="custom_amount" placeholder="Enter desired amount" required
+                [(ngModel)]="amount" [readonly]="true">
+            </div>
+          </div>
+  
+          <div class="button">
+            <input *ngIf="!disable_button" type="submit" [ngClass]="!donationDataVerify() ? 'disable_btn' : 'enable_btn'"
+              [disabled]="!donationDataVerify()" value="Pay Now" (click)="initDonation()">
+  
+            <input style="text-transform: capitalise;" *ngIf="disable_button" type="submit" class="disable_btn"
+              [disabled]="!donationDataVerify()" value="Please Wait..." (click)="initDonation()">
+          </div>
+        </form>
+      </div>
+    </div>
+  
+  </body> -->
+
+  <div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+  
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+  </div>
+  
+  <div class="loaderText">Initialising Payment Gateway...</div>
+
+
+  <paytm-checkout></paytm-checkout>

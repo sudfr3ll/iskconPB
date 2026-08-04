@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "bwi-iskon-dev"
+  },
+  "targets": {
+    "bwi-iskon-dev": {
+      "hosting": {
+        "bwi-iskon-payment": [
+          "bwi-iskon-payment"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

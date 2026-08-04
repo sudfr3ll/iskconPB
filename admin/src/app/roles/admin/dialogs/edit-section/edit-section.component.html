@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Edit Section</h1>
+<div mat-dialog-content>
+    <form class="example-form">
+
+        <h3>{{data.section.type}}</h3>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Section Name</mat-label>
+            <input matInput placeholder="Section Name" name="name" value="data.section.name" [ngModelOptions]="{standalone: true}" [(ngModel)]="data.section.name">
+        </mat-form-field>
+
+        <div *ngFor="let item of collectionData">
+            <mat-checkbox  id="{{ item.id }}" #checkBox [value]="item" [ngModelOptions]="{standalone: true}" (change)="onSelectCheckbox(checkBox, item)" [(ngModel)]="item.checked">
+                {{ item.title.length >= 80 ? item.title.slice(0, 80) + ' ...' :
+                item.title }}
+            </mat-checkbox>
+        </div>
+     
+
+    </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+    <button mat-button (click)="close()">Cancel</button>
+    <button mat-button cdkFocusInitial (click)="onClickSave($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

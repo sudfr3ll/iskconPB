@@ -1,0 +1,35 @@
+.example-container {
+    // position: absolute;
+    // top: 60px;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+    // bottom: 0;
+    min-height: 100%;
+}
+  
+.example-sidenav {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 280px;
+    // padding: 10px 20px;
+}
+  
+.example-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+mat-sidenav-content {
+    position: relative;
+
+    .padding-plz {
+        padding: 25px ;
+        background: linear-gradient(90deg, #7761AC 0%, #C0AFE9 100%) !important;
+    }
+}

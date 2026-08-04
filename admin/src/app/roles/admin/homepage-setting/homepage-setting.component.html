@@ -1,0 +1,32 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Homepage Setting</h5>
+                    <button (click)="addNewSection(sections)">Add</button>
+                </div>
+
+                <div class="sectionCards" *ngFor="let section of sections?.sections; let i = index">
+                    <div class="left">
+                        <h4 style="font-size: 17px; font-weight: 500; margin-bottom: 7px;">Section {{i}}</h4>
+                        <p>Name : {{section.name}}</p>
+                        <p>Type : {{section.type}}</p>
+                    </div>
+
+                    <div class="right">
+                        <i class="material-icons edit-btn" (click)="editSection(section)">edit</i>
+                        <mat-icon class="deleteIcon" (click)="deleteSection(section.widgetId)">delete</mat-icon>
+                    </div>  
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

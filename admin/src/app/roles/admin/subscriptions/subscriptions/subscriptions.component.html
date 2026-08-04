@@ -1,0 +1,39 @@
+<div class="container-fluid base-inputs">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Subscriptions</h5>
+          </div>
+          <form class="form theme-form" *ngIf="subscriptions">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">S.No.</th>
+                  <th scope="col">createdAt</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Magazine Name</th>
+                  <th scope="col">Payment Mode</th>
+                  <th scope="col">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let subscription of subscriptions; let i= index">
+                  <td>{{i + 1}}</td>
+                  <td>{{formatDate(subscription.createdAt)}}</td>
+                  <td>{{subscription.subscription.name}}</td>
+                  <td>{{subscription.magazineName}}</td>
+                  <td>{{subscription.payment.mode || 'N/A'}}</td>
+                  <td>
+                    <mat-icon class="edit-btn" (click)="viewSubscription(subscription)">visibility</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+          <div class="card-footer">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "bwi-iskon-dev"
+  },
+  "targets": {
+    "bwi-iskon-dev": {
+      "hosting": {
+        "iskon-dev-admin": [
+          "iskon-dev-admin"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

@@ -1,0 +1,108 @@
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Contact Us</h5>
+        </div>
+        <form class="form theme-form" *ngIf="data">
+          <div class="row">
+            <h4>Email</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>First</mat-label>
+                <input
+                  required
+                  matInput
+                  class="form-control"
+                  id="email1"
+                  type="text"
+                  name="email1"
+                  placeholder="First email"
+                  autocomplete="off"
+                  [(ngModel)]="data.email[0]"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Second</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="email2"
+                  type="text"
+                  name="email2"
+                  placeholder="Second email"
+                  autocomplete="off"
+                  [(ngModel)]="data.email[1]"
+                />
+              </mat-form-field>
+            </div>
+            <h4>Phone</h4>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>First</mat-label>
+                <input
+                  required
+                  matInput
+                  class="form-control"
+                  id="phone1"
+                  type="text"
+                  name="phone1"
+                  placeholder="First phone"
+                  autocomplete="off"
+                  [(ngModel)]="data.phone[0]"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Second</mat-label>
+                <input
+                  matInput
+                  class="form-control"
+                  id="phone2"
+                  type="text"
+                  name="phone2"
+                  placeholder="Second email"
+                  autocomplete="off"
+                  [(ngModel)]="data.phone[1]"
+                />
+              </mat-form-field>
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>WhatsApp</mat-label>
+                <input
+                  required
+                  matInput
+                  class="form-control"
+                  id="whatsapp"
+                  type="text"
+                  name="whatsapp"
+                  placeholder="WhatsApp"
+                  autocomplete="off"
+                  [(ngModel)]="data.whatsapp[0]"
+                />
+              </mat-form-field>
+            </div>
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Address</mat-label>
+                <input
+                  required
+                  matInput
+                  class="form-control"
+                  id="address"
+                  type="text"
+                  name="address"
+                  placeholder="Second email"
+                  autocomplete="off"
+                  [(ngModel)]="data.address"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+        </form>
+        <div class="card-footer">
+          <button mat-button (click)="onSubmit()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+
+
+<div class="container-fluid base-inputs">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5>Settings</h5>
+                    <button (click)="addNewDonationType()"  [disabled]="showHeader">Add</button>
+                </div>
+                <form class="form theme-form" *ngIf="donationTypes">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">
+                                    <mat-checkbox class="tp-margin"
+                                        (change)="onClickSelectAllCheckBox($event, donationTypes)"
+                                        [(ngModel)]="indeterminate" [ngModelOptions]="{standalone: true}"
+                                        [checked]="check"></mat-checkbox>
+                                </th>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Content</th>
+                                <th scope="col">Minimum Amount</th>
+                                <th scope="col">Maximim Amount</th>
+                                <th scope="col">Edit</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let donationType of donationTypes; let i = index">
+                                <td>
+                                    <mat-checkbox (change)="onSelectCheckBox($event, donationType, donationTypes)"
+                                        class="tp-margin" [ngModelOptions]="{standalone: true}"
+                                        [(ngModel)]="donationType.checked" id="{{ donationType.id }}">
+                                    </mat-checkbox>
+                                </td>
+                                <td>
+                                    <img [src]="getImage(donationType)" />
+                                </td>
+                                <td>{{ donationType.name }}</td>
+                                <td>{{ donationType.content }}</td>
+                                <td>{{ donationType.minAmount }}</td>
+                                <td>{{ donationType.maxAmount }}</td>
+
+                                <td>
+                                    <i class="material-icons edit-btn" (click)="editDonationType(donationType)">edit</i>
+                                </td>
+                                <td>
+                                    <mat-icon class="deleteIcon"
+                                        (click)="deleteDonationType(donationType.id)">delete</mat-icon>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+                <div class="card-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+    <div class="cross" (click)="onClickCross(donationTypes)"><mat-icon class="closeIcon">close</mat-icon></div>
+    <div class="totalSelection">{{count}} selected</div>
+    <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span
+            class="deleteButton_header">Delete</span></div>
+</div>

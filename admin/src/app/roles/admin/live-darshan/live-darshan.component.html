@@ -1,0 +1,134 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Live Darshan</h5>
+        </div>
+        <form class="form theme-form" *ngIf="darshan">
+          <div class="row">
+            <div class="img-section">
+              <div class="example-full-width">
+                <span style="font-weight: 500;">Active:</span>
+                <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="onChangeActiveToggle($event.checked)"
+                  [(ngModel)]="darshan.active"></mat-slide-toggle>
+              </div>
+              <div class="uploadBtnContainer">
+                <div class="coverImage">Youtube Thumbnail</div>
+
+                <div class="upload-btn">
+                  <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+                  <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendCoverImageEvent($event)">
+                </div>
+              </div>
+
+              <p class="note_image">* Please do not upload image from here for automatic fetching youtube thumbnail using Youtube Id
+              </p>
+
+              <div *ngIf="darshan.coverImage" class="imageUpload">
+                <div (click)="removeCoverImage()" class="cross_container">
+                  <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+                </div>
+                <img [src]="getImage(darshan)">
+              </div>
+
+              <div *ngIf="!darshan.coverImage && darshan.youtubeId">
+                <img src='http://img.youtube.com/vi/{{darshan.youtubeId}}/hqdefault.jpg'>
+              </div>
+
+
+
+            </div>
+
+              <div class="img-section">
+                <div class="uploadBtnContainer">
+                  <div class="coverImage">Darshan Picture</div>
+                  <div class="upload-btn">
+                    <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+                    <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendImageEvent($event)">
+                  </div>
+                </div>
+              
+                <div *ngIf="darshan.darshanPic" class="imageUpload">
+                  <div (click)="removeImage()" class="cross_container">
+                    <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+                  </div>
+                  <img [src]="darshan.darshanPic">
+                </div>
+              </div>
+
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Youtube ID</mat-label>
+                <input required matInput class="form-control" id="youtubeId" type="text" name="youtubeId"
+                  [(ngModel)]="darshan.youtubeId" placeholder="Youtube ID" autocomplete="off" />
+              </mat-form-field>
+
+            </div>
+
+              <div class="form-group">
+                <mat-form-field class="w-100" fxFlex>
+                  <mat-label>Description</mat-label>
+                  <input required matInput class="form-control" id="description" type="text" name="description"
+                    [(ngModel)]="darshan.description" placeholder="Description" autocomplete="off" />
+                </mat-form-field>
+              
+              </div>
+
+           
+
+            <div class="form-group">
+              <mat-form-field class="w-100" fxFlex>
+                <mat-label>Title</mat-label>
+                <input required matInput class="form-control" id="title" type="text" name="title"
+                  [(ngModel)]="darshan.title" placeholder="Title" autocomplete="off" />
+              </mat-form-field>
+            </div>
+
+
+            <div class="form-group">
+              <mat-label style="font-weight: 500;">Timings</mat-label>
+            </div>
+            <div class="chips-row">
+              <div class="chip" *ngFor="let timing of darshan.timings; let i = index">
+                <div>{{ timing.start}} - {{ timing.end}}</div>
+                <mat-icon (click)="removeTime(i)">cancel</mat-icon>
+              </div>
+            </div>
+            <div class="time">
+              <div>
+                <label for="startTime">Start</label>
+                <input type="time" name="startTime" min="09:00" max="18:00" [(ngModel)]="timing.start" required />
+              </div>
+              -
+              <div>
+                <label for="endTime">End</label>
+                <input type="time" name="endTime" min="09:00" max="18:00" [(ngModel)]="timing.end" required />
+              </div>
+              <button (click)="addTime(timing)" class="save-btn">
+                <mat-icon>check</mat-icon>
+                Save
+              </button>
+            </div>
+           
+          </div>
+        </form>
+        <div class="card-footer">
+          <button mat-button (click)="saveDarshan()">
+            Submit
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

@@ -1,0 +1,65 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div (scroll)="onWindowScroll()" class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Messages</h5>
+          <button (click)="addNewMessage()" [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form" *ngIf="messages">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, messages)" [(ngModel)]="indeterminate" [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                </th>
+                <th scope="col">Image</th>
+                <th scope="col">Author</th>
+                <!-- <th scope="col">Created at</th> -->
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let message of messages; let i=index;">
+                <td>
+                  <mat-checkbox (change)="onSelectCheckBox($event, message, messages)" class="tp-margin" [ngModelOptions]="{standalone: true}"  [(ngModel)]="message.checked" id="{{ message.id }}">                    
+                  </mat-checkbox>
+                </td>
+                <td>
+                  <img [src]="getImage(message)">
+                </td>
+
+                <td>{{message.author}}</td>
+                <!-- <td *ngIf="!message.createdAt">N/A</td>
+                  <td *ngIf="message.createdAt">{{ message.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+
+                <td>
+                  <i class="material-icons edit-btn" (click)="editMessage(message)">edit</i>
+                </td>
+                <td>
+                  <mat-icon class="deleteIcon" (click)="deleteMessage(message.id)">delete</mat-icon>
+                </td>
+                <!-- <i class="material-icons">delete</i> -->
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="card-footer">
+          <!-- <button mat-button>Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+<div class="cross" (click)="onClickCross(messages)"><mat-icon class="closeIcon">close</mat-icon></div>
+<div class="totalSelection">{{count}} selected</div>
+<div class="deleteBtn_header" (click)="openDeleteConfirmationModal()" ><span class="deleteButton_header">Delete</span></div>
+</div>

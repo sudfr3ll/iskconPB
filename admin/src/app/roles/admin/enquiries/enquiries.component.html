@@ -1,0 +1,35 @@
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Enquiries</h5>
+        </div>
+        <form class="form theme-form" *ngIf="enquiries">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let enquiry of enquiries; let i= index">
+                <td>{{enquiry.name}}</td>
+                <td>{{enquiry.email}}</td>
+                <td>{{enquiry.phone}}</td>
+                <td>
+                  <mat-icon class="edit-btn" (click)="viewEnquiry(enquiry)">visibility</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

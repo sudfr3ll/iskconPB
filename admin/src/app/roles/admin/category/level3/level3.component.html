@@ -1,0 +1,75 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Level-3</h5>
+          <button (click)="addCategory()"  [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form" *ngIf="categories">
+          <table class="table">
+            <thead>
+              <tr>
+
+                <th scope="col">
+                  <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, categories)" [(ngModel)]="indeterminate"
+                    [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                </th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <!-- <th scope="col">Type</th> -->
+                <!-- <th scope="col">Description</th> -->
+                <!-- <th scope="col">Active</th> -->
+                <!-- <th scope="col">Created at</th> -->
+                <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <!-- show all medicines -->
+            <tbody>
+              <tr *ngFor="let category of categories; let i=index">
+                <td>
+                  <mat-checkbox (change)="onSelectCheckBox($event, category, categories)" class="tp-margin"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="category.checked" id="{{ category.id }}">
+                  </mat-checkbox>
+                </td>
+                <td>
+                  <img [src]="category.coverImage" />
+                </td>
+                <td>{{category.name}}</td>
+                <!-- <td>{{category.type}}</td> -->
+                <!-- <td>{{category.description}}</td> -->
+                <!-- <td>{{category.active}}</td> -->
+
+                <!-- <td *ngIf="!category.createdAt">N/A</td>
+                <td *ngIf="category.createdAt">{{ category.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                <td>
+                  <i class="material-icons edit-btn" (click)="editCategory(category)">edit</i>
+                </td>
+
+                    <td>
+                      <mat-icon class="deleteIcon" (click)="deleteCategory(category.id)">delete</mat-icon>
+                    </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+  <div class="cross" (click)="onClickCross(categories)"><mat-icon class="closeIcon">close</mat-icon></div>
+  <div class="totalSelection">{{count}} selected</div>
+  <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+  </div>
+</div>

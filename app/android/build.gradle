@@ -1,0 +1,42 @@
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+
+rootProject.buildDir = '../build'
+
+
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+}
+
+
+subprojects {
+    project.evaluationDependsOn(':app')
+}
+
+
+// AGP 8 namespace fix for old plugins
+subprojects { subproject ->
+
+    plugins.withId("com.android.library") {
+
+        android {
+
+            if (namespace == null) {
+                namespace = subproject.group.toString()
+            }
+
+        }
+
+    }
+
+}
+
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}

@@ -1,0 +1,63 @@
+<h1 mat-dialog-title>Message</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <div class="img-section">
+  
+
+      <div class="uploadBtnContainer">
+        <div class="coverImage">Image</div>
+        <div class="upload-btn">   
+          <mat-icon class="uploadIcon">cloud_upload</mat-icon> 
+          <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendImageEvent($event)">
+        </div>
+      </div>
+
+          <div *ngIf="message.coverImage" class="imageUpload">
+            <div (click)="removeImage()" class="cross_container">
+              <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+            </div>
+            <img [src]="message.coverImage">
+          </div>
+
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Author</mat-label>
+      <input matInput placeholder="Author" [(ngModel)]="message.author" name="author">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Image content</mat-label>
+      <input matInput placeholder="Content on image" [(ngModel)]="message.imgContent" name="imgContent">
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Message content</mat-label>
+      <input matInput placeholder="Enter content for message" [(ngModel)]="message.messageContent"
+        name="messageContent">
+    </mat-form-field> -->
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Message content</mat-label>
+        <!-- <input matInput placeholder="Quote" [(ngModel)]="quote.quote" name="quote"> -->
+        <textarea rows="4" matInput placeholder="Enter content for message" [(ngModel)]="message.messageContent" name="messageContent"></textarea>
+      </mat-form-field>
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Url</mat-label>
+      <input matInput placeholder="url" name="messageUrl" [(ngModel)]="message.messageUrl">
+    </mat-form-field>
+
+      <div class="example-full-width">
+        <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="onChange($event.checked)"
+          [(ngModel)]="message.notifyUser">Do you want to notify user ?</mat-slide-toggle>
+      </div>
+  </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+  <button mat-button mat-dialog-close (click)="close()">Cancel</button>
+  <button mat-button cdkFocusInitial (click)="saveMessage($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled> 
+</div>

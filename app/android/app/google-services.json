@@ -1,0 +1,150 @@
+{
+  "project_info": {
+    "project_number": "1092143369876",
+    "project_id": "bwi-iskon-dev",
+    "storage_bucket": "bwi-iskon-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092143369876:android:e1d3317dd90142baa92e81",
+        "android_client_info": {
+          "package_name": "com.app.iskcon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092143369876-pei24p13dpkenbqidadnk5d7si21224j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.app.iskcon",
+            "certificate_hash": "83660365e8a252740fb9958e40503a5cafc51e1b"
+          }
+        },
+        {
+          "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjLb373TlxTRUWnPr88-yBYo7WPPgtUqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1092143369876-na8of4uueghlfu7suobn6h7nb55c1vt2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.iskcon"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092143369876:android:0eaf6320dbbb279ea92e81",
+        "android_client_info": {
+          "package_name": "com.example.iskcon"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092143369876-422nvgnocqn01kgcg7lekg8l2u0ijflp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iskcon",
+            "certificate_hash": "caf0d7ea8b15b3675446f5273af4126e6a2fa61f"
+          }
+        },
+        {
+          "client_id": "1092143369876-c8tv8hl6kpeo2m0iveq8eb81rjmjq6dk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iskcon",
+            "certificate_hash": "83660365e8a252740fb9958e40503a5cafc51e1b"
+          }
+        },
+        {
+          "client_id": "1092143369876-u1ggorfni6jm2t3n3qb7l3d7l8l0lrus.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.iskcon",
+            "certificate_hash": "d395b72b91e597a3f0640176eede32dca0c0d908"
+          }
+        },
+        {
+          "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjLb373TlxTRUWnPr88-yBYo7WPPgtUqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1092143369876-na8of4uueghlfu7suobn6h7nb55c1vt2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.iskcon"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1092143369876:android:28545edafd9334f3a92e81",
+        "android_client_info": {
+          "package_name": "com.iskcon.punjabibagh"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDjLb373TlxTRUWnPr88-yBYo7WPPgtUqI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1092143369876-j2mep717ff2crcjmb0nt7kbv5rotjqr7.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1092143369876-na8of4uueghlfu7suobn6h7nb55c1vt2.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.app.iskcon"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

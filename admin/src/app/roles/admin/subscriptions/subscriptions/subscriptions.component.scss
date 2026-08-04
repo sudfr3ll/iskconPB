@@ -1,0 +1,101 @@
+.card {
+    box-shadow: 0 0 20px rgb(8 21 66 / 10%);
+    border-radius: 15px;
+    
+    &-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        padding: 20px 40px;
+        border-bottom: 1px solid #ecf3fa;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+
+        h5 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-block: 10px;
+            text-transform: capitalize;
+        }
+        button {
+            margin-left: auto;
+        }
+    }
+
+    .form {
+        padding: 20px 40px;
+        background-color: #fff;
+
+        .table {
+            background-color: #fff;
+            border-collapse: collapse;
+            width: 100%;
+    
+            thead {
+                th {
+                    text-align: left;
+                    font-size: 14px;
+                    font-weight: 500;
+                    border-bottom: 2px solid #ecf3fa;
+                    padding: 12px 5px;
+                    // padding: 12px 10px;
+                }
+            }
+            tbody {
+    
+                tr:nth-of-type(even) {
+                    background: #fafafa;
+                }
+    
+                tr {
+                    // cursor: pointer;
+                    // border-bottom: 1px solid lightslategrey;
+
+                    img {
+                        max-width: 100px;
+                    }
+    
+                    &:hover {
+                        // background: #ededed;
+                        transition: all 0.3s ease-in-out;
+                    }
+    
+                    td {
+                        vertical-align: middle;
+                        padding: 5px;
+                        // padding: 10px;
+    
+                        // &:first-child {
+                        //     text-align: center;
+                        // }
+    
+                        .img-fluid {
+                            // max-width: 35px;
+                            max-height: 70px;
+                        }
+    
+                        .edit-btn {
+                            padding-left: 9px;
+                            &:hover {
+                                cursor: pointer;
+                                color: #7366ff;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        &-group {
+            display: flex;
+            width: 100%;
+            gap: 16px;
+
+            mat-form-field {
+                width: 100%;
+            }
+        }
+    }
+
+}

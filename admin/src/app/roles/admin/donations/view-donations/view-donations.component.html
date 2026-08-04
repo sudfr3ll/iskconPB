@@ -1,0 +1,46 @@
+<div class="close-dialog">
+    <h1 mat-dialog-title>Donation</h1>
+    <mat-icon (click)="closeDialog()">close</mat-icon>
+</div>
+<div mat-dialog-content>
+    <div class="enquiry-box">
+
+        <mat-label>Name</mat-label>
+        <h3>{{donation.donation.name}}</h3>
+
+        <mat-label>Amount</mat-label>
+        <h3 *ngIf="donation.amount">{{donation.amount}}</h3>
+        <h3 *ngIf="!donation.amount">N/A</h3>
+
+        <div *ngIf="donation.payment.mode">
+            <mat-label>Payment Mode</mat-label>
+            <h3>{{donation.payment.mode}}</h3>
+        </div>
+
+        <mat-label>Payment Status</mat-label>
+        <h3 [ngClass]="{ 'green': donation.payment?.status =='completed', 'yellow': donation.payment?.status =='pending','grey': donation.payment?.status =='cancelled', 'red': donation.payment?.status =='failed' }" *ngIf="donation.payment.status">{{donation.payment.status}}</h3>
+        <h3 *ngIf="!donation.payment.status">N/A</h3>
+
+
+        <div *ngIf="donation?.payment?.status == 'completed'">
+            <h2>Billing Details : </h2>
+            
+            <div *ngIf="getName() as name">
+                <mat-label>Name</mat-label>
+                <h3>{{name}}</h3>
+            </div>
+
+            <div *ngIf="getCity() as city">
+                <mat-label>City</mat-label>
+                <h3>{{city}}</h3>
+            </div>
+
+            <div *ngIf="getPhone() as phone">
+                <mat-label>Phone</mat-label>
+                <h3>{{phone}}</h3>
+            </div>
+
+        </div>
+      
+    </div>
+</div>

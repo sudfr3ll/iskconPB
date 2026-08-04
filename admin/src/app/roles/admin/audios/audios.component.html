@@ -1,0 +1,72 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Audios</h5>
+            <button (click)="addAudio()"  [disabled]="showHeader">Add</button>
+          </div>
+          <form class="form theme-form">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">
+                      <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, audios)" [(ngModel)]="indeterminate"
+                        [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                    </th>
+                  <!-- <th scope="col">Image</th> -->
+                  <th scope="col">Title</th>
+                  <!-- <th scope="col">Chapter</th> -->
+                  <!-- <th scope="col">Category Level</th> -->
+                  <!-- <th scope="col">URL</th> -->
+                  <!-- <th scope="col">Created at</th> -->
+                  <th scope="col">Edit</th> 
+                    <th scope="col">Audio</th>
+                </tr>
+              </thead>
+              <!-- show all medicines -->
+              <tbody>
+                <tr *ngFor="let audio of audios; let i = index">
+                    <td>
+                      <mat-checkbox (change)="onSelectCheckBox($event, audio, audios)" class="tp-margin"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="audio.checked" id="{{ audio.id }}">
+                      </mat-checkbox>
+                    </td>
+                    <!-- <td>
+                        <img [src]="audio.coverImage"/>
+                    </td> -->
+                  <td>{{audio.title}}</td>
+                  <!-- <td>{{audio.chapter}}</td> -->
+                  <!-- <td>{{audio.categoryLevel}}</td> -->
+                  <!-- <td>{{audio.url}}</td> -->
+                 
+                  <!-- <td *ngIf="audio.createdAt">{{ audio.createdAt.toDate() | date : "longDate" }}</td> -->
+                  <!-- <td *ngIf="audio.createdAt">{{ audio.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                  <td>
+                    <i class="material-icons edit-btn" (click)="editAudio(audio)">edit</i>
+                  </td>
+                    <td>
+                      <mat-icon class="deleteIcon" (click)="deleteAudio(audio.id)">delete</mat-icon>
+                    </td>
+                  
+                  <!-- <i class="material-icons">delete</i> -->
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="if_showHeader" *ngIf="showHeader">
+    <div class="cross" (click)="onClickCross(audios)"><mat-icon class="closeIcon">close</mat-icon></div>
+    <div class="totalSelection">{{count}} selected</div>
+    <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+    </div>
+  </div>

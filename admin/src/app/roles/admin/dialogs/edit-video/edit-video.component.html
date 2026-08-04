@@ -1,0 +1,114 @@
+<h1 mat-dialog-title>Video</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <div class="img-section">
+      <div class="uploadBtnContainer">
+        <div class="coverImage">Youtube Thumbnail</div>
+        <div class="upload-btn">
+          <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+          <input accept="image/x-png,image/gif,image/jpeg" accept="image/x-png,image/gif,image/jpeg" type="file"
+            (change)="sendImageEvent($event)">
+        </div>
+      </div>
+
+      <p class="note_image">* Please do not upload image from here for automatic fetching youtube thumbnail using Youtube
+        Id
+      </p>
+
+      <div *ngIf="video.coverImage" class="imageUpload">
+        <div (click)="removeImage()" class="cross_container">
+          <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+        </div>
+        <img [src]="video.coverImage">
+      </div>
+
+      <div *ngIf="!video.coverImage && video.url">
+        <img src='http://img.youtube.com/vi/{{video.url}}/hqdefault.jpg'>
+      </div>
+
+    </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Youtube ID</mat-label>
+      <input required matInput class="form-control" id="youtubeId" type="text" name="youtubeId" [(ngModel)]="video.url"
+        placeholder="Youtube ID" autocomplete="off" />
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input [(ngModel)]="video.title" matInput placeholder="Title" name="title">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input [(ngModel)]="video.description" matInput placeholder="Description" name="escription">
+    </mat-form-field>
+
+
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Category Level 1</mat-label>
+      <mat-select [(ngModel)]="categoryOneId" (selectionChange)="changeCategoryOneName($event)" name="categoryOne">
+        <mat-option *ngFor="let categoryOne of categoryOneVideoData" [value]="categoryOne.id">
+          {{categoryOne.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Category Level 2</mat-label>
+      <mat-select [disabled]="categoryTwoVideoData.length == 0" [(ngModel)]="categoryTwoId"
+        (selectionChange)="changeCategoryTwoName($event)" name="categoryTwo">
+        <mat-option *ngFor="let categoryTwo of categoryTwoVideoData" [value]="categoryTwo.id">
+          {{categoryTwo.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>Category Level 3</mat-label>
+          <mat-select  [disabled]="categoryThreeVideoData.length == 0" [(ngModel)]="categoryThreeId" (selectionChange)="changeCategoryThreeName($event)"
+            name="categoryThree">
+            <mat-option *ngFor="let categoryThree of categoryThreeVideoData"
+              [value]="categoryThree.id">
+              {{categoryThree.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Category Level 3</mat-label>
+      <mat-select [disabled]="categoryThreeVideoData.length == 0" [(ngModel)]="categoryThreeId"
+        (selectionChange)="changeCategoryThreeName($event)" name="categoryThree">
+        <mat-option *ngFor="let categoryThree of categoryThreeVideoData" [value]="categoryThree.id">
+          {{categoryThree.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Search keywords</mat-label>
+      <input matInput [(ngModel)]="keyword" placeholder="New keyword..." [ngModelOptions]="{standalone: true}" />
+      <button mat-stroked-button (click)="addKeyword()" matSuffix [disabled]="!keyword.length">Add</button>
+    </mat-form-field>
+    <mat-chip-list>
+      <mat-chip *ngFor="let keywordItem of video.keywords" (removed)="removeKeyword(keywordItem)">
+        {{keywordItem}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+
+  </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial [disabled]="!(categoryTwoId) && !(categoryOneId) && !(categoryThreeId)"
+    (click)="saveEvent($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

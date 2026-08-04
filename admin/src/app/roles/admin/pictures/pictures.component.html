@@ -1,0 +1,73 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <!-- <div class="card" infiniteScroll [infiniteScrollDistance]="0" [infiniteScrollThrottle]="10"
+        (scrolled)="onScroll()" [scrollWindow]="false"> -->
+
+        <div class="card">
+        <div class="card-header">
+          <h5>Pictures</h5>
+          <button (click)="addPictures()" [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form" *ngIf="pictures">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, pictures)"
+                    [(ngModel)]="indeterminate" [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                </th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+               
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <!-- show all medicines -->
+            <tbody>
+              <tr *ngFor="let picture of pictures;let i = index">
+                <td>
+                  <mat-checkbox (change)="onSelectCheckBox($event, picture, pictures)" class="tp-margin"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="picture.checked" id="{{ picture.id }}">
+                  </mat-checkbox>
+                </td>
+                <td *ngIf="picture.image.thumb">
+                  <img [src]="picture.image.thumb" />
+                </td>
+                <td *ngIf="!picture.image.thumb">
+                  <img [src]="picture.image.org" />
+                </td>
+                <td>{{picture.title}}</td>
+                <!-- <td>{{picture.description}}</td> -->
+                <!-- <td>{{picture.categoryLevel}}</td> -->
+
+                <!-- <td *ngIf="!picture.createdAt">N/A</td>
+                <td *ngIf="picture.createdAt">{{ picture.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                <td>
+                  <i class="material-icons edit-btn" (click)="editPictures(picture)">edit</i>
+                </td>
+                <td>
+                  <mat-icon class="deleteIcon" (click)="deletePicture(picture.id)">delete</mat-icon>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="card-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="if_showHeader" *ngIf="showHeader">
+  <div class="cross" (click)="onClickCross(pictures)"><mat-icon class="closeIcon">close</mat-icon></div>
+  <div class="totalSelection">{{count}} selected</div>
+  <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+  </div>
+</div>

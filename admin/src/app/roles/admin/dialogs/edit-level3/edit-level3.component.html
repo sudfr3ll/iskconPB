@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Level-3</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+
+      <div class="img-section">
+      <div class="uploadBtnContainer">
+        <div class="coverImage">Image</div>
+        <div class="upload-btn">
+          <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+          <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendImageEvent($event)">
+        </div>
+      </div>
+      
+      <div *ngIf="category.coverImage" class="imageUpload">
+        <div (click)="removeImage()" class="cross_container">
+          <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+        </div>
+        <img [src]="category.coverImage">
+      </div>
+      </div>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Name</mat-label>
+      <input matInput placeholder="Name" [(ngModel)]="category.name" name="name">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Description</mat-label>
+      <input matInput placeholder="Description" [(ngModel)]="category.description" name="description">
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Type</mat-label>
+      <mat-select (selectionChange)="changetype($event)" [(ngModel)]="category.type" [(value)]="selectedCategory"
+        name="type">
+        <mat-option *ngFor="let type of categoryTypes" [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Select Category Level-1</mat-label>
+      <mat-select [disabled]="!category.type" (selectionChange)="changeCategoryOneName($event)" [(value)]="category.categoryId_L1" name="categoryOneName">
+        <mat-option *ngFor="let categoryOneName of categoryOne" [value]="categoryOneName.id">
+          {{categoryOneName.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Select Category Level-2</mat-label>
+      <mat-select [disabled]="!category.categoryId_L1" (selectionChange)="changeCategoryTwoName($event)" [(value)]="category.categoryId_L2" name="categoryTwoName">
+        <mat-option *ngFor="let categoryTwoName of categoryTwo" [value]="categoryTwoName.id">
+          {{categoryTwoName.name}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="example-full-width">
+      <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="onChange($event.checked)"
+        [(ngModel)]="category.active">Active</mat-slide-toggle>
+    </div>
+  </form>
+
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [disabled]="!category.categoryId_L1 && !category.categoryId_L2"  (click)="saveCategory($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

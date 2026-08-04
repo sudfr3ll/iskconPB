@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Quote</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <!-- <p>{{data.quote.date.seconds * 1000 | date:'MM-dd-yyyy'}}</p> -->
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Quote</mat-label>
+      <!-- <input matInput placeholder="Quote" [(ngModel)]="quote.quote" name="quote"> -->
+      <textarea rows="4" matInput placeholder="Quote" [(ngModel)]="quote.quote" name="quote"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Quote date</mat-label>
+      <input style="width: 90%;" matInput [matDatepicker]="dob" disabled [(ngModel)]="quote.date"
+        [ngModelOptions]="{standalone: true}">
+      <p *ngIf="data?.quote.date">{{data?.quote?.date.seconds * 1000 | date:'MM-dd-yyyy'}}</p>
+      <mat-datepicker-toggle matIconSuffix [for]="dob"></mat-datepicker-toggle>
+      <mat-datepicker #dob disabled="false"></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap:8px;">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="saveQuote($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

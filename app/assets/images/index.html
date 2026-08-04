@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        label.switch {
+            outline: none;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+            outline: none;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked+.slider {
+            background-color: #2196F3;
+        }
+
+        input:focus+.slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked+.slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+    </style>
+</head>
+
+<body>
+    <form action='https://test.payu.in/_payment' method='post' name="payuForm">
+        <input type="hidden" name="firstname" value="Vikas Kumar" />
+        <input type="hidden" name="lastname" value="" />
+        <input type="hidden" name="surl" value="https://www.google.com" />
+        <input type="hidden" name="phone" value="9999999999" />
+        <input type="hidden" name="key" value="C0Dr8m" />
+        <input type="hidden" name="hash" value="c2522a8d561e7c52f7d6b2d46c96b924afac8554313af4b80edef3e237e179bd6e2020e8c548060306d9fa2cf5c75 
+        c35205bcc4b09bcf5b9a9becec8de2952d0" />
+        <input type="hidden" name="curl" value="http://www.google.com" />
+        <input type="hidden" name="furl" value="https:/www.yahoo.in" />
+        <input type="hidden" name="txnid" value="PLS-10061-3" />
+        <input type="hidden" name="productinfo" value="SAU Admission 2014" />
+        <input type="hidden" name="amount" value="600.000" />
+        <input type="hidden" name="email" value="vikaskumarsre@gmail.com" />
+        <input type="submit" value="submit" id="requestPayload">
+    </form>
+    <h2 id="value">Toggle Switch is off</h2>
+    <label class="switch">
+        <input type="checkbox" name="myCheckbox">
+        <span class="slider round"></span>
+    </label>
+    <script type="text/javascript">
+        var _selector = document.querySelector('input[name=myCheckbox]');
+        _selector.addEventListener('change', function (event) {
+            var message = (_selector.checked) ? "Toggle Switch is on" : "Toggle Switch is off";
+            if (messageHandler) {
+                messageHandler.postMessage(message);
+                print('Hello this is webview')
+            }
+
+        });
+        var _submit = document.querySelector('input[name=myCheckbox]');
+        _submit.addEventListener('submit', function (event) {
+
+            if (messageHandler) {
+                messageHandler.postMessage(message);
+                print('Hello this is webview')
+            }
+
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<div class="container-fluid base-inputs">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>Subscriptions</h5>
+            <button (click)="addNewSubscription()"  [disabled]="showHeader">Add</button>
+          </div>
+          <form class="form theme-form" *ngIf="subscriptions">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, subscriptions)" [(ngModel)]="indeterminate"
+                      [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                  </th>
+                  <!-- <th scope="col">Created at</th> -->
+                  <th scope="col">Subscription Name</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <!-- show all medicines -->
+              <tbody>
+                <tr *ngFor="let subscription of subscriptions; let i = index">
+                  <td>
+                    <mat-checkbox (change)="onSelectCheckBox($event, subscription, subscriptions)" class="tp-margin"
+                      [ngModelOptions]="{standalone: true}" [(ngModel)]="subscription.checked" id="{{ subscription.id }}">
+                    </mat-checkbox>
+                  </td>
+                  <td>{{ subscription.name }}</td>
+                  <td>{{ subscription.amount }}</td>
+                  <!-- <td *ngIf="!subscription.createdAt">N/A</td>
+                  <td *ngIf="subscription.createdAt">{{ subscription.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                  <td>
+                    <i class="material-icons edit-btn" (click)="editSubscription(subscription)">edit</i>
+                  </td>
+                  <td>
+                    <mat-icon class="deleteIcon" (click)="deleteSubscription(subscription.id)">delete</mat-icon>
+                  </td>
+                  <!-- <i class="material-icons">delete</i> -->
+                </tr>
+              </tbody>
+            </table>
+          </form>
+          <div class="card-footer">
+            <!-- <button mat-button>Submit</button> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="if_showHeader" *ngIf="showHeader">
+    <div class="cross" (click)="onClickCross(subscriptions)"><mat-icon class="closeIcon">close</mat-icon></div>
+    <div class="totalSelection">{{count}} selected</div>
+    <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+    </div>
+  </div>

@@ -1,0 +1,65 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Festivals</h5>
+          <button (click)="addNewFestival()"  [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form" *ngIf="festivals">
+          <table class="table">
+            <thead>
+              <tr>
+                  <th scope="col">
+                    <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, festivals)" [(ngModel)]="indeterminate"
+                      [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                  </th>
+                <th scope="col">Image</th>
+                <th scope="col">Name</th>
+                <th scope="col">Festival date</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let festival of festivals; let i= index">
+                <td>
+                  <mat-checkbox (change)="onSelectCheckBox($event, festival, festivals)" class="tp-margin"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="festival.checked" id="{{ festival.id }}">
+                  </mat-checkbox>
+                </td>
+                <td>
+                  <img [src]="festival.coverImage" />
+                </td>
+                <td>{{festival.title }}</td>
+                <td>{{festival.date.seconds * 1000 | date:'MM-dd-yyyy'}}</td>
+                <!-- <td *ngIf="!festival.createdAt">N/A</td>
+                      <td *ngIf="festival.createdAt">{{ festival.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                <td>
+                  <i class="material-icons edit-btn" (click)="editFestival(festival)">edit</i>
+                </td>
+
+                <td>
+                  <mat-icon class="deleteIcon" (click)="deleteFestival(festival.id)">delete</mat-icon>
+                </td>
+                <!-- <i class="material-icons">delete</i> -->
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+  <div class="cross" (click)="onClickCross(festivals)"><mat-icon class="closeIcon">close</mat-icon></div>
+  <div class="totalSelection">{{count}} selected</div>
+  <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+  </div>
+</div>

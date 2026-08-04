@@ -1,0 +1,59 @@
+.card {
+    box-shadow: 0 0 20px rgb(8 21 66 / 10%);
+    border-radius: 15px;
+    
+    &-header {
+        position: relative;
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        padding: 20px 40px;
+        border-bottom: 1px solid #ecf3fa;
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+
+        h5 {
+            font-size: 22px;
+            font-weight: 500;
+            margin-block: 10px;
+            text-transform: capitalize;
+        }
+    }
+
+    .form {
+        padding: 20px 40px;
+        background-color: #fff;
+
+        h3 {
+            font-size: 18px;
+            font-weight: 400;
+
+            &:nth-of-type(even) {
+                margin-top: 50px;
+            }
+        }
+
+        h4 {
+            font-size: 16px;
+            font-weight: 400;
+            margin-bottom: 6px;
+        }
+
+        &-group {
+            display: flex;
+            width: 100%;
+            gap: 16px;
+
+            mat-form-field {
+                width: 100%;
+
+                &.followers {
+                    width: 30%;
+                }
+            }
+        }
+    }
+}
+h4{
+    font-weight: 500 !important;
+}

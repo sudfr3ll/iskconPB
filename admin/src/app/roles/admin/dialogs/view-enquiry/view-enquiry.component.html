@@ -1,0 +1,17 @@
+<div class="close-dialog">
+<h1 mat-dialog-title>Enquiry</h1>
+<mat-icon (click)="closeDialog()">close</mat-icon>
+</div>
+<div mat-dialog-content>
+<div class="enquiry-box">
+    
+    <mat-label>Name</mat-label>
+    <h3>{{enquiry.name}}</h3>
+    <mat-label>Email</mat-label>
+    <h3>{{enquiry.email}}</h3>
+    <mat-label>Phone</mat-label>
+    <h3>{{enquiry.phone}}</h3>
+    <mat-label>Message</mat-label>
+    <p>{{enquiry.message}}</p>
+</div>
+</div>

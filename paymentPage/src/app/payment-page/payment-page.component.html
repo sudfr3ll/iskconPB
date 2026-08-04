@@ -1,0 +1,60 @@
+<!-- <body>
+  <div class="background_img_container">
+    <div class="back_img">
+      <img src="../../assets/donationBanner.jpg" alt="">
+    </div>
+    <div class="opacity"></div>
+
+    <div class="img_container"><img src="../assets/god.png" alt=""></div>
+  </div>
+  <div class="container">
+    <div class="content">
+      <form action="#">
+        <div class="user-details">
+        
+          <div class="input-box">
+            <span class="details">Amount</span>
+           
+            <input type="number" min="2" name="custom_amount" placeholder="Enter desired amount" required
+              [(ngModel)]="donationData.amount" (keyup)="hideZero()" (input)="minOrderAmountAlert()">
+              <span class="name_error" *ngIf="amtError">*Minimum amount for online transaction is Rs 10/-</span>
+          </div>
+        </div>
+
+        <div class="amount_label">
+          <ng-container *ngFor="let amount of customAmounts;let i=index">
+            <div class="all_amount">
+                <input class="inputt" type="radio" name="gender" [id]="i" [value]="amount"  [(ngModel)]="donationData.amount" (input)="onChangeAmountSelection($event)">
+                <label class="amt_badge" [for]="i">
+                  <span class="dot one"></span>
+                  <span class="gender">₹ {{amount}}</span>
+                </label>
+            </div>
+          
+          </ng-container>
+
+        </div>
+
+        <div class="button">
+          <input *ngIf="!disable_button" type="submit" [ngClass]="!donationDataVerify() ? 'disable_btn' : 'enable_btn'"
+            [disabled]="!donationDataVerify()" value="Donate Now" (click)="initDonation()">
+
+          <input style="text-transform: capitalise;" *ngIf="disable_button" type="submit" class="disable_btn"
+            [disabled]="!donationDataVerify()" value="Please Wait..." (click)="initDonation()">
+        
+        </div>
+      </form>
+    </div>
+  </div>
+</body> -->
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="loaderText">Initialising Payment Gateway...</div>
+
+
+<paytm-checkout></paytm-checkout>

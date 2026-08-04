@@ -1,0 +1,47 @@
+<h1 mat-dialog-title>Setting</h1>
+<div mat-dialog-content>
+    <form class="example-form">
+        <div class="img-section">
+            <div class="uploadBtnContainer">
+                <div class="coverImage">Image</div>
+                <div class="upload-btn">
+                    <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+                    <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendImageDonationType($event)">
+                </div>
+            </div>
+
+            <div *ngIf="donationType.coverImage" class="imageUpload">
+                <div (click)="removeImage()" class="cross_container">
+                    <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+                </div>
+                <img [src]="donationType.coverImage">
+            </div>
+        </div>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Author" [(ngModel)]="donationType.name" name="author">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Content</mat-label>
+            <input matInput placeholder="Content" [(ngModel)]="donationType.content" name="content">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Minimum Amount</mat-label>
+            <input min="0" type="number" matInput placeholder="minimum amount" [(ngModel)]="donationType.minAmount" name="minAmount">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Maximum Amount</mat-label>
+            <input matInput type="number" placeholder="Content" [(ngModel)]="donationType.maxAmount" name="maxAmount">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="saveDonationType($event)">Save</button>
+</div>
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

@@ -1,0 +1,38 @@
+.enquiry-box{
+    min-width: 500px;
+    max-width: 500px;
+    width: 100%;
+}
+mat-label{
+    font-size: 16px;
+    font-weight: 500;
+    color: #6254f7;
+}
+.close-dialog{
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+mat-icon{
+    cursor: pointer;
+}
+mat-icon:hover{
+    color: #6254f7;
+}
+}
+
+.grey{
+    color: rgb(70, 70, 70);
+}
+
+.yellow{
+    color: rgb(249, 218, 22);
+}
+
+.red{
+    color: rgb(132, 1, 1);
+}
+
+.green{
+    color: rgb(1, 132, 42);
+}

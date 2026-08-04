@@ -1,0 +1,72 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Videos</h5>
+          <button (click)="addVideo()"  [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form">
+          <table class="table">
+            <thead>
+              <tr>
+                  <th scope="col">
+                    <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, videos)" [(ngModel)]="indeterminate"
+                      [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                  </th>
+                <th scope="col">Image</th>
+                <th scope="col">Title</th>
+                <!-- <th scope="col">youtubeId</th> -->
+                  <!-- <th scope="col">Description</th> -->
+                  <!-- <th scope="col">Category Level</th> -->
+                  <!-- <th scope="col">URL</th> -->
+                  <!-- <th scope="col">Created at</th> -->
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <!-- show all medicines -->
+            <tbody>
+              <tr *ngFor="let video of videos; let i = index">
+                  <td>
+                    <mat-checkbox (change)="onSelectCheckBox($event, video, videos)" class="tp-margin"
+                      [ngModelOptions]="{standalone: true}" [(ngModel)]="video.checked" id="{{ video.id }}">
+                    </mat-checkbox>
+                  </td>
+                <td>
+                  <img [src]="getImage(video)" />
+                </td>
+                <td>{{video.title}}</td>
+                <!-- <td>{{video.url}}</td> -->
+                <!-- <td>{{video.discription}}</td> -->
+                <!-- <td>{{'Category Level'}}</td> -->
+                <!-- <td>{{video.url}}</td> -->
+                <!-- <td *ngIf="!video.createdAt">N/A</td>
+                <td *ngIf="video.createdAt">{{ video.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                <td>
+                  <i class="material-icons edit-btn" (click)="editVideo(video)">edit</i>
+                </td>
+                <td>
+                  <mat-icon class="deleteIcon" (click)="deleteVideo(video.id)">delete</mat-icon>
+                </td>
+                <!-- <i class="material-icons">delete</i> -->
+              </tr>
+            </tbody>
+          </table>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+  <div class="cross" (click)="onClickCross(videos)"><mat-icon class="closeIcon">close</mat-icon></div>
+  <div class="totalSelection">{{count}} selected</div>
+  <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+  </div>
+</div>

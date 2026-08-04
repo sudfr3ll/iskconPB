@@ -1,0 +1,67 @@
+<h1 mat-dialog-title>News</h1>
+<div mat-dialog-content>
+  <form class="example-form">
+    <div class="img-section">
+      <div class="uploadBtnContainer">
+        <div class="coverImage">Image</div>
+        <div class="upload-btn">
+          <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+          <input accept="image/x-png,image/gif,image/jpeg" type="file" multiple (change)="sendImageEvent($event)">
+        </div>
+      </div>
+      <div class="container_main" *ngFor="let image of news.images; let i = index">
+        <ng-container *ngIf="image.org">
+            <div class="imageUpload">
+              <div (click)="removeImage(i)" class="cross_container">
+                <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+              </div>
+              <img [src]="image.org">
+            </div>
+        </ng-container>
+      
+      </div>
+
+    </div>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput placeholder="Author" name="author" [(ngModel)]="news.title">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Content</mat-label>
+      <input matInput placeholder="Content" name="content" [(ngModel)]="news.content">
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Url</mat-label>
+      <input matInput placeholder="newsUrl" name="newsUrl" [(ngModel)]="news.newsUrl">
+    </mat-form-field>
+    <div class="example-full-width" style="display: flex; column-gap: 20px;">
+      <mat-label>Show Donation</mat-label>
+      <mat-slide-toggle [ngModelOptions]="{standalone: true}" (change)="onChangeDonationAllowed($event.checked)"
+        [(ngModel)]="news.donationAllowed">Active</mat-slide-toggle>
+    </div>
+
+    <mat-form-field appearance="fill" class="example-full-width">
+      <mat-label>Search keywords</mat-label>
+      <input matInput [(ngModel)]="keyword" placeholder="New keyword..." [ngModelOptions]="{standalone: true}" />
+      <button mat-stroked-button (click)="addKeyword()" matSuffix [disabled]="!keyword.length">Add</button>
+    </mat-form-field>
+    <mat-chip-list>
+      <mat-chip *ngFor="let keywordItem of news.keywords" (removed)="removeKeyword(keywordItem)">
+        {{keywordItem}}
+        <button matChipRemove>
+          <mat-icon>cancel</mat-icon>
+        </button>
+      </mat-chip>
+    </mat-chip-list>
+
+  </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button cdkFocusInitial (click)="saveNews($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>

@@ -1,0 +1,62 @@
+<div *ngIf="showLoader" class="spinnerContainer">
+  <div class="absoluteSpinner"></div>
+  <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
+
+
+<div class="container-fluid base-inputs">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header">
+            <h5>News</h5>
+            <button (click)="addNews()"  [disabled]="showHeader">Add</button>
+          </div>
+          <form class="form theme-form" *ngIf = "news">
+            <table class="table">
+              <thead>
+                <tr>
+                    <th scope="col">
+                      <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, news)" [(ngModel)]="indeterminate"
+                        [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                    </th>
+                  <th scope="col">Image</th>
+                  <th scope="col">Title</th>
+                  <!-- <th scope="col">Created at</th> -->
+                  <th scope="col">Edit</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor = "let new of news; let i = index">
+                    <td>
+                      <mat-checkbox (change)="onSelectCheckBox($event, new, news)" class="tp-margin"
+                        [ngModelOptions]="{standalone: true}" [(ngModel)]="new.checked" id="{{ new.id }}">
+                      </mat-checkbox>
+                    </td>
+                  <td>
+                    <img [src]="new.images[0].org" />
+                  </td>
+                  <td>{{new.title }}</td>
+              
+                  <td>
+                    <i class="material-icons edit-btn" (click)="editNews(new)" >edit</i>
+                  </td>
+                  <td>
+                    <mat-icon class="deleteIcon" (click)="deleteNews(new.id)">delete</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="if_showHeader" *ngIf="showHeader">
+    <div class="cross" (click)="onClickCross(news)"><mat-icon class="closeIcon">close</mat-icon></div>
+    <div class="totalSelection">{{count}} selected</div>
+    <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+    </div>
+  </div>

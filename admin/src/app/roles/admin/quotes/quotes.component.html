@@ -1,0 +1,58 @@
+<div class="container-fluid base-inputs">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h5>Quotes</h5>
+          <button (click)="addNewQuote()"  [disabled]="showHeader">Add</button>
+        </div>
+        <form class="form theme-form" *ngIf="quotes">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">
+                  <mat-checkbox class="tp-margin" (change)="onClickSelectAllCheckBox($event, quotes)" [(ngModel)]="indeterminate"
+                    [ngModelOptions]="{standalone: true}" [checked]="check"></mat-checkbox>
+                </th>
+                <th scope="col">Quote</th>
+                <!-- <th scope="col">Created at</th> -->
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+              </tr>
+            </thead>
+            <!-- show all medicines -->
+            <tbody>
+              <tr *ngFor="let quote of quotes; let i = index">
+                <td>
+                  <mat-checkbox (change)="onSelectCheckBox($event, quote, quotes)" class="tp-margin"
+                    [ngModelOptions]="{standalone: true}" [(ngModel)]="quote.checked" id="{{ quote.id }}">
+                  </mat-checkbox>
+                </td>
+                <td>{{ quote.quote }}</td>
+                <!-- <td *ngIf="!quote.createdAt">N/A</td>
+                <td *ngIf="quote.createdAt">{{ quote.createdAt.seconds * 1000 | date:'MM-dd-yyyy'}}</td> -->
+                <td>
+                  <i class="material-icons edit-btn" (click)="editQuote(quote)">edit</i>
+                </td>
+                <td>
+                  <mat-icon class="deleteIcon" (click)="deleteQuote(quote.id)">delete</mat-icon>
+                </td>
+                <!-- <i class="material-icons">delete</i> -->
+              </tr>
+            </tbody>
+          </table>
+        </form>
+        <div class="card-footer">
+          <!-- <button mat-button>Submit</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="if_showHeader" *ngIf="showHeader">
+  <div class="cross" (click)="onClickCross(quotes)"><mat-icon class="closeIcon">close</mat-icon></div>
+  <div class="totalSelection">{{count}} selected</div>
+  <div class="deleteBtn_header" (click)="openDeleteConfirmationModal()"><span class="deleteButton_header">Delete</span>
+  </div>
+</div>

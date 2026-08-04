@@ -1,0 +1,26 @@
+<ng-container class="outer-most">
+  <mat-sidenav-container class="example-container">
+    <!-- <mat-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
+      <app-sidemenu></app-sidemenu>
+    </mat-sidenav> -->
+
+      <mat-sidenav *ngIf="isLoggedIn" #sidenav mode="side" opened="true" class="example-sidenav">
+        <app-sidemenu></app-sidemenu>
+      </mat-sidenav>
+
+    <mat-sidenav-content perfectScrollbar>
+
+      <!-- <div *ngIf="showLoader" class="spinnerContainer">
+        <div class="absoluteSpinner"></div>
+        <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+      </div> -->
+
+      <!-- <app-header></app-header> -->
+
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</ng-container>

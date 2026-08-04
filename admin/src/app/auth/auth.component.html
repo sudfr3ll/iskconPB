@@ -1,0 +1,27 @@
+<!-- <header>
+</header> -->
+<div class="flex">
+    <img src="../../assets/images/ISKCON PB Logo.png" style="max-width: 240px;max-height: 70%;" alt="">
+    <form class="card">
+        <h2>Welcome</h2>
+        <span>Enter your mobile number to sign in.</span>
+        <mat-form-field class="w-100" fxFlex *ngIf="signInFlag">
+            <mat-label>Mobile No.</mat-label>
+            <input matInput placeholder="Enter mobile no." autocomplete="off" name="phone" [(ngModel)]="phone">
+        </mat-form-field>
+        <mat-form-field class="w-100" fxFlex *ngIf="!signInFlag">
+            <mat-label>OTP</mat-label>
+            <input matInput placeholder="Enter your OTP" autocomplete="off" name="otp" [(ngModel)]="otp">
+        </mat-form-field>
+        <button mat-raised-button (click)="sendOtp()" *ngIf="signInFlag" [disabled]="isSendingOtp">
+            <span *ngIf="!isSendingOtp">Sign in</span>
+            <span *ngIf="isSendingOtp">Sending OTP...</span>
+        </button>
+        <button mat-raised-button (click)="verifyOtp()" *ngIf="!signInFlag" [disabled]="isVerifyingOtp">
+            <span *ngIf="!isVerifyingOtp">Verify OTP</span>
+            <span *ngIf="isVerifyingOtp">Verifying...</span>
+        </button>
+    </form>
+    <div id="recaptcha-container"></div>
+</div>
+

@@ -1,0 +1,76 @@
+<h1 mat-dialog-title>Blog</h1>
+<div mat-dialog-content>
+    <form class="example-form">
+        <div class="img-section">
+            <div class="uploadBtnContainer">
+                <div class="coverImage">Image</div>
+                <div class="upload-btn">
+                    <mat-icon class="uploadIcon">cloud_upload</mat-icon>
+                    <input accept="image/x-png,image/gif,image/jpeg" type="file" (change)="sendImageEvent($event)">
+                </div>
+            </div>
+
+            <div *ngIf="blog.coverImage" class="imageUpload">
+                <div (click)="removeImage()" class="cross_container">
+                    <span class="crossIcon"><mat-icon>cancel</mat-icon></span>
+                </div>
+                <img [src]="blog.coverImage">
+            </div>
+        </div>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Title</mat-label>
+            <input matInput placeholder="Author" name="author" [(ngModel)]="blog.title">
+        </mat-form-field>
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Url</mat-label>
+            <input matInput placeholder="url" name="url" [(ngModel)]="blog.url">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Category Level 1</mat-label>
+            <mat-select [(ngModel)]="categoryOneId" (selectionChange)="changeCategoryOneName($event)"
+                name="categoryOne">
+                <mat-option *ngFor="let categoryOne of categoryOneBlogData" [value]="categoryOne.id">
+                    {{categoryOne.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Category Level 2</mat-label>
+            <mat-select [disabled]="categoryTwoBlogData.length == 0" [(ngModel)]="categoryTwoId"
+                (selectionChange)="changeCategoryTwoName($event)" name="categoryTwo">
+                <mat-option *ngFor="let categoryTwo of categoryTwoBlogData" [value]="categoryTwo.id">
+                    {{categoryTwo.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="example-full-width">
+            <mat-label>Search keywords</mat-label>
+            <input matInput [(ngModel)]="keyword" placeholder="New keyword..." [ngModelOptions]="{standalone: true}" />
+            <button mat-stroked-button (click)="addKeyword()" matSuffix [disabled]="!keyword.length">Add</button>
+        </mat-form-field>
+
+
+
+        <mat-chip-list>
+            <mat-chip *ngFor="let keywordItem of blog.keywords" (removed)="removeKeyword(keywordItem)">
+                {{keywordItem}}
+                <button matChipRemove>
+                    <mat-icon>cancel</mat-icon>
+                </button>
+            </mat-chip>
+        </mat-chip-list>
+
+    </form>
+</div>
+<div mat-dialog-actions style="display: flex;justify-content: flex-end;gap: 6px;">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button cdkFocusInitial (click)="saveBlog($event)">Save</button>
+</div>
+
+<div *ngIf="showLoader" class="spinnerContainer">
+    <div class="absoluteSpinner"></div>
+    <sa-spinner-round-filled color="#7366FF" id="loader"></sa-spinner-round-filled>
+</div>
