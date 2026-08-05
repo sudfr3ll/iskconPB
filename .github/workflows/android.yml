@@ -41,7 +41,7 @@ jobs:
 
       # Create keystore
       
-            - name: Decode Keystore
+      - name: Decode Keystore
         env:
           ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
         run: |
