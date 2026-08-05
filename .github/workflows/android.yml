@@ -42,7 +42,7 @@ jobs:
       # Create keystore
       - name: Decode Keystore
         run: |
-          mkdir -p android/app/cert
+          mkdir -p android/cert
           echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/cert/iskcon-keystore.jks
 
       # Create key.properties
