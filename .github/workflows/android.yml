@@ -43,7 +43,7 @@ jobs:
       - name: Decode Keystore
         run: |
           mkdir -p android/cert
-          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/app/cert/iskcon-keystore.jks
+          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/cert/iskcon-keystore.jks
 
       # Create key.properties
       - name: Create key.properties
@@ -52,7 +52,7 @@ jobs:
           storePassword=${{ secrets.KEYSTORE_PASSWORD }}
           keyPassword=${{ secrets.KEY_PASSWORD }}
           keyAlias=${{ secrets.KEY_ALIAS }}
-          storeFile=app/cert/iskcon-keystore.jks
+          storeFile=cert/iskcon-keystore.jks
           EOF
 
       - name: Flutter Pub Get
