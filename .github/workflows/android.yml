@@ -40,12 +40,27 @@ jobs:
           rm -rf ~/.gradle/daemon
 
       # Create keystore
-      - name: Decode Keystore
+      
+            - name: Decode Keystore
+        env:
+          ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
         run: |
           mkdir -p android/cert
-          echo "${{ secrets.ANDROID_KEYSTORE }}" | base64 -d > android/cert/iskcon-keystore.jks
 
-      # Create key.properties
+          echo "$ANDROID_KEYSTORE" | base64 --decode > android/cert/iskcon-keystore.jks
+
+          echo "Secret length: ${#ANDROID_KEYSTORE}"
+          ls -la android
+          ls -la android/cert
+
+          if [ -f android/cert/iskcon-keystore.jks ]; then
+            echo "Keystore created successfully"
+            wc -c android/cert/iskcon-keystore.jks
+          else
+            echo "Keystore NOT created"
+            exit 1
+          fi
+
       - name: Create key.properties
         run: |
           cat > android/key.properties <<EOF
@@ -55,11 +70,21 @@ jobs:
           storeFile=cert/iskcon-keystore.jks
           EOF
 
+          echo "===== key.properties ====="
+          cat android/key.properties
+
       - name: Flutter Pub Get
         run: flutter pub get
 
       - name: Flutter Doctor
         run: flutter doctor -v
+
+      - name: Verify Signing Files
+        run: |
+          pwd
+          ls -la android
+          ls -la android/cert
+          cat android/key.properties
 
       - name: Build APK
         run: flutter build apk --release --no-tree-shake-icons
