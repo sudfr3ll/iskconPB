@@ -47,7 +47,7 @@ jobs:
         run: |
           mkdir -p android/cert
 
-          echo "$ANDROID_KEYSTORE" | base64 --decode > android/cert/iskcon-keystore.jks
+          echo "$ANDROID_KEYSTORE" | base64 --decode > android/app/cert/iskcon-keystore.jks
 
           echo "Secret length: ${#ANDROID_KEYSTORE}"
           ls -la android
