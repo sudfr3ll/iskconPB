@@ -1,4 +1,5 @@
 // ignore_for_file: use_build_context_synchronously
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -60,11 +61,12 @@ class _FeaturedTilesState extends State<FeaturedTiles> {
       "icon": 'assets/svg/007-diwali.svg',
       'image': 'assets/features1/VaisnavaCalendar.png'
     },
-    {
-      'title': 'blogs',
-      "icon": 'assets/svg/008-eye.svg',
-      'image': 'assets/images/isckon_0003_daily_darshan.jpg'
-    },
+   if (!Platform.isIOS)
+  {
+    'title': 'blogs',
+    "icon": 'assets/svg/008-eye.svg',
+    'image': 'assets/images/isckon_0003_daily_darshan.jpg'
+  },
     {
       'title': 'Spiritual Books',
       "icon": 'assets/svg/quran2.svg',
