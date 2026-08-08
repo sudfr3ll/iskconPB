@@ -19,49 +19,86 @@ jobs:
       GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx8g -Dkotlin.daemon.jvm.options=-Xmx2g"
 
     steps:
+
+      # --------------------------------------------------
+      # Checkout repository
+      # --------------------------------------------------
       - name: Checkout
         uses: actions/checkout@v4
 
+
+      # --------------------------------------------------
+      # Java
+      # --------------------------------------------------
       - name: Setup Java
         uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '17'
 
+
+      # --------------------------------------------------
+      # Flutter
+      # --------------------------------------------------
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
           flutter-version: '3.44.2'
           cache: true
 
+
+      # --------------------------------------------------
+      # Clean Gradle cache
+      # --------------------------------------------------
       - name: Clean Gradle Cache
         run: |
           rm -rf ~/.gradle/caches
           rm -rf ~/.gradle/daemon
 
-      # Create keystore
-      
+
+      # --------------------------------------------------
+      # Decode Android Keystore
+      #
+      # Actual structure:
+      #
+      # app/
+      #   android/
+      #     app/
+      #       cert/
+      #         iskcon-keystore.jks
+      #
+      # --------------------------------------------------
       - name: Decode Keystore
+        shell: bash
         env:
           ANDROID_KEYSTORE: ${{ secrets.ANDROID_KEYSTORE }}
         run: |
-          mkdir -p android/cert
+          mkdir -p android/app/cert
 
-          echo "$ANDROID_KEYSTORE" | base64 --decode > android/app/cert/iskcon-keystore.jks
+          printf '%s' "$ANDROID_KEYSTORE" \
+            | tr -d '\r\n ' \
+            | base64 --decode \
+            > android/app/cert/iskcon-keystore.jks
 
           echo "Secret length: ${#ANDROID_KEYSTORE}"
-          ls -la android
-          ls -la android/cert
 
-          if [ -f android/cert/iskcon-keystore.jks ]; then
+          echo "===== Keystore directory ====="
+          ls -lah android/app/cert
+
+          if [ -s android/app/cert/iskcon-keystore.jks ]; then
             echo "Keystore created successfully"
-            wc -c android/cert/iskcon-keystore.jks
+            wc -c android/app/cert/iskcon-keystore.jks
           else
-            echo "Keystore NOT created"
+            echo "ERROR: Keystore was not created"
             exit 1
           fi
 
+
+      # --------------------------------------------------
+      # Create key.properties
+      # --------------------------------------------------
       - name: Create key.properties
+        shell: bash
         run: |
           cat > android/key.properties <<EOF
           storePassword=${{ secrets.KEYSTORE_PASSWORD }}
@@ -70,27 +107,80 @@ jobs:
           storeFile=cert/iskcon-keystore.jks
           EOF
 
-          echo "===== key.properties ====="
-          cat android/key.properties
+          echo "key.properties created successfully"
 
+
+      # --------------------------------------------------
+      # Verify signing files
+      # --------------------------------------------------
+      - name: Verify Signing Files
+        shell: bash
+        run: |
+          echo "===== Current directory ====="
+          pwd
+
+          echo "===== Android directory ====="
+          ls -lah android
+
+          echo "===== App directory ====="
+          ls -lah android/app
+
+          echo "===== Certificate directory ====="
+          ls -lah android/app/cert
+
+          echo "===== key.properties ====="
+          sed 's/=.*/=***HIDDEN***/' android/key.properties
+
+          echo "===== Keystore size ====="
+          wc -c android/app/cert/iskcon-keystore.jks
+
+
+      # --------------------------------------------------
+      # Verify keystore itself
+      # --------------------------------------------------
+      - name: Verify Keystore
+        shell: bash
+        env:
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+        run: |
+          keytool -list \
+            -keystore android/app/cert/iskcon-keystore.jks \
+            -storepass "$KEYSTORE_PASSWORD" \
+            > /dev/null
+
+          echo "Keystore is valid"
+
+
+      # --------------------------------------------------
+      # Flutter dependencies
+      # --------------------------------------------------
       - name: Flutter Pub Get
         run: flutter pub get
 
+
+      # --------------------------------------------------
+      # Flutter Doctor
+      # --------------------------------------------------
       - name: Flutter Doctor
         run: flutter doctor -v
 
-      - name: Verify Signing Files
-        run: |
-          pwd
-          ls -la android
-          ls -la android/cert
-          cat android/key.properties
 
+      # --------------------------------------------------
+      # Build Release APK
+      # --------------------------------------------------
       - name: Build APK
-        run: flutter build apk --release --no-tree-shake-icons
+        run: |
+          flutter build apk \
+            --release \
+            --no-tree-shake-icons
 
+
+      # --------------------------------------------------
+      # Upload APK
+      # --------------------------------------------------
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-release
           path: app/build/app/outputs/flutter-apk/app-release.apk
+          if-no-files-found: error
