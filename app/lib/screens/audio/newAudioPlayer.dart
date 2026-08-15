@@ -4,10 +4,10 @@ import 'package:audio_session/audio_session.dart';
 import 'package:audio_video_progress_bar/audio_video_progress_bar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iskcon/screens/audio/audioplaylist.dart';
 import 'package:iskcon/widgets/customAppBar.dart';
@@ -15,8 +15,6 @@ import 'package:just_audio/just_audio.dart';
 import 'package:marquee/marquee.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
-import 'dart:isolate';
-import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,18 +91,6 @@ class _MainScreenState extends State<MainScreen> {
           (position, bufferedPosition, duration) => PositionData(
               position, bufferedPosition, duration ?? Duration.zero));
 
-  @pragma('vm:entry-point')
-  static void downloadCallback(
-    String id,
-    int status,
-    int progress,
-  ) {
-    final SendPort? send =
-        IsolateNameServer.lookupPortByName('downloader_send_port');
-
-    send?.send([id, status, progress]);
-  }
-
   Future<void> getdata() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     print(pref.getStringList('playlist'));
@@ -142,7 +128,6 @@ class _MainScreenState extends State<MainScreen> {
     ));
     getdata();
     _init();
-    FlutterDownloader.registerCallback(downloadCallback);
   }
 
   Future<void> _init() async {
@@ -849,21 +834,22 @@ class _MainScreenState extends State<MainScreen> {
                                             if (status.isGranted) {
                                               Directory directory = Directory(
                                                   '/storage/emulated/0/Download');
-                                              // final externalDir =
-                                              //     await getExternalStorageDirectories(
-                                              //         type: StorageDirectory.downloads);
                                               Fluttertoast.showToast(
                                                   msg: 'Downloading...');
-                                              FlutterDownloader.enqueue(
-                                                  fileName:
-                                                      '${widget.data[i]['title']}.mp3',
-                                                  url: widget.data[i]['url'],
-                                                  savedDir: directory.path,
-                                                  showNotification:
-                                                      true, // show download progress in status bar (for Android)
-                                                  openFileFromNotification:
-                                                      true, // click on notification to open downloaded file (for Android)
-                                                  headers: {});
+                                              try {
+                                                await Dio().download(
+                                                  widget.data[i]['url'],
+                                                  '${directory.path}/${widget.data[i]['title']}.mp3',
+                                                );
+                                                Fluttertoast.showToast(
+                                                    msg:
+                                                        'Downloaded to Downloads folder');
+                                              } catch (e) {
+                                                print(
+                                                    'Download failed: $e');
+                                                Fluttertoast.showToast(
+                                                    msg: 'Download failed');
+                                              }
                                             } else {
                                               print('Permission Denied');
                                             }

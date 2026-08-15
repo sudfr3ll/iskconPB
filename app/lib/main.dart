@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:iskcon/constants/provider.dart';
 import 'package:iskcon/routes/routes_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -18,11 +17,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  await FlutterDownloader.initialize(
-    debug: true,
-    ignoreSsl: true,
-  );
 
   runApp(const MyApp());
 }
