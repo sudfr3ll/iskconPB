@@ -153,46 +153,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
-  camera:
-    dependency: transitive
-    description:
-      name: camera
-      sha256: dfa8fc5a1adaeb95e7a54d86a5bd56f4bb0e035515354c8ac6d262e35cec2ec8
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.6"
-  camera_android:
-    dependency: transitive
-    description:
-      name: camera_android
-      sha256: "039fc1a0bcdfc1a35ac8438524ca2ae45bd2fc921475c03808f76790b7f337e3"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.10.10+18"
-  camera_avfoundation:
-    dependency: transitive
-    description:
-      name: camera_avfoundation
-      sha256: "11b4aee2f5e5e038982e152b4a342c749b414aa27857899d20f4323e94cb5f0b"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.9.23+2"
-  camera_platform_interface:
-    dependency: transitive
-    description:
-      name: camera_platform_interface
-      sha256: "7ac852d77699acee79f0d438b793feee26721841e50973576419ff5c6d95e9b7"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.13.0"
-  camera_web:
-    dependency: transitive
-    description:
-      name: camera_web
-      sha256: "1245a480a113437f8d46d19c0fb90cea9db921436d9cf2ba5fb11854a1312693"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.5+4"
   carousel_slider:
     dependency: "direct main"
     description:
@@ -305,22 +265,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.19.1"
-  community_charts_common:
-    dependency: transitive
-    description:
-      name: community_charts_common
-      sha256: d997ade57f15490346de46efbe23805d378a672aafbf5e47e19517964b671009
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
-  community_charts_flutter:
-    dependency: transitive
-    description:
-      name: community_charts_flutter
-      sha256: "4614846b99782ab79b613687704865e5468ecada3f0ad1afe1cdc3ff5b727f72"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.4"
   country_state_city_picker:
     dependency: "direct main"
     description:
@@ -718,14 +662,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.4.8"
-  flutter_plugin_android_lifecycle:
-    dependency: transitive
-    description:
-      name: flutter_plugin_android_lifecycle
-      sha256: "3854fe5e3bff0b113c658f260b90c95dea17c92db0f2addeac2e343dd9969785"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.35"
   flutter_riverpod:
     dependency: transitive
     description:
@@ -792,14 +728,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.5"
-  heart_bpm:
-    dependency: "direct main"
-    description:
-      name: heart_bpm
-      sha256: "3651cf368b9b2732fb5b63f244375cc7b932665b1fd13280c70e37621d892936"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.0.0+0"
   hooks:
     dependency: transitive
     description:
@@ -1152,14 +1080,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.3.0"
-  payu_checkoutpro_flutter:
-    dependency: "direct main"
-    description:
-      name: payu_checkoutpro_flutter
-      sha256: "04502bb7570b8f38c15174f11f021eadd26025805071f00ae2cbfcc8f8aad8d5"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.4.5"
   permission_handler:
     dependency: "direct main"
     description:
@@ -1477,14 +1397,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
-  stream_transform:
-    dependency: transitive
-    description:
-      name: stream_transform
-      sha256: ad47125e588cfd37a9a7f86c7d6356dde8dfe89d071d293f80ca9e9273a33871
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.1"
   string_scanner:
     dependency: transitive
     description:
