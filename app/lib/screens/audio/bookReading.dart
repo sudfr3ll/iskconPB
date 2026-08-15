@@ -8,7 +8,6 @@ import 'package:iskcon/constants/databaseService.dart';
 import 'package:iskcon/screens/audio/newAudioPlayer.dart';
 import 'package:iskcon/widgets/customAppBar.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shimmer/shimmer.dart';
@@ -39,11 +38,9 @@ class _AudioBookReadingState extends State<AudioBookReading> {
       children: List<AudioSource>.generate(data.length, (index) {
         return AudioSource.uri(
           Uri.parse(data[index]['url']),
-          tag: MediaItem(
+          tag: TrackTag(
             id: '$index1',
-            // album: widget.data[index]['chapter'],
             title: data[index]['title'],
-            // artUri: Uri.parse(widget.data[index]['coverImage']),
           ),
         );
       }),

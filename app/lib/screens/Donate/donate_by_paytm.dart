@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_functions/cloud_functions.dart';
+// Only used by the disabled Paytm txn-token flow (see openPaytmWebView below).
+// import 'package:cloud_functions/cloud_functions.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:iskcon/screens/Donate/open_webview_paytm.dart';
+// Paytm webview flow disabled — see openPaytmWebView() below.
+// import 'package:iskcon/screens/Donate/open_webview_paytm.dart';
 import 'package:iskcon/screens/Subscription/SubscriptionWebView.dart';
 import 'package:iskcon/widgets/DonationTile.dart';
 import 'package:iskcon/widgets/Loader.dart';
@@ -129,21 +131,22 @@ class _DonateByPaytmState extends State<DonateByPaytm> {
   }
 
 */
-  Future<void> donationPending(docId) async {
-    var data = {
-      "amount": selectedAmount,
-      "createdAt": DateTime.now(),
-      "userName": nameController.text,
-      "phoneNo": phoneNoController.text,
-      "donation": {"id": widget.donId, "name": widget.donName},
-      "payment": {"details": {}, "mode": "paytm", "status": "pending"},
-    };
-
-    await FirebaseFirestore.instance
-        .collection('donations')
-        .doc(docId)
-        .set(data);
-  }
+  // Only used by the disabled Paytm flow (openPaytmWebView above).
+  // Future<void> donationPending(docId) async {
+  //   var data = {
+  //     "amount": selectedAmount,
+  //     "createdAt": DateTime.now(),
+  //     "userName": nameController.text,
+  //     "phoneNo": phoneNoController.text,
+  //     "donation": {"id": widget.donId, "name": widget.donName},
+  //     "payment": {"details": {}, "mode": "paytm", "status": "pending"},
+  //   };
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('donations')
+  //       .doc(docId)
+  //       .set(data);
+  // }
 
   void paymentOptionSheet(context) {
     showModalBottomSheet(
@@ -182,12 +185,13 @@ class _DonateByPaytmState extends State<DonateByPaytm> {
                               isClick = true;
                             });
                             print("clicked : $isClick");
-                            if (optn['code'] == 1) {
-                              //openPayTm();
-                              openPaytmWebView(context);
-
-                              print("clicked : $isClick");
-                            }
+                            // Paytm option disabled.
+                            // if (optn['code'] == 1) {
+                            //   //openPayTm();
+                            //   openPaytmWebView(context);
+                            //
+                            //   print("clicked : $isClick");
+                            // }
 
                             if (optn['code'] == 2 || optn['code'] == 3) {
                               // Navigator.pop(context);
@@ -234,47 +238,49 @@ class _DonateByPaytmState extends State<DonateByPaytm> {
     );
   }
 
-  void openPaytmWebView(context) async {
-    setState(() {
-      loading = true;
-      isClick = true;
-    });
-    String docid = FirebaseFirestore.instance.collection("donations").doc().id;
-    if (widget.isSub) {
-      await subscriptionPending(docid);
-    } else {
-      await donationPending(docid);
-    }
-    Navigator.pop(context);
-    var newvalue = await Navigator.push(
-      context,
-      CupertinoPageRoute(
-        builder: (context) => PaytmWebViews(
-          isSub: widget.isSub,
-          txnid: docid,
-          productinfo: widget.donName,
-          amount: selectedAmount,
-        ),
-      ),
-    );
-
-    if (mounted) {
-      setState(() {
-        isClick = false;
-        loading = false;
-      });
-    }
-
-    print("clicked : $isClick");
-    debugPrint('my payment status 2 : $newvalue');
-    newvalue == 'Success'
-        ? Fluttertoast.showToast(msg: 'Payment succesfully...')
-        : newvalue == 'Failed'
-        ? Fluttertoast.showToast(msg: 'Payment Failed...')
-        : newvalue == 'Cancelled'
-        ? Fluttertoast.showToast(msg: 'Payment Canceled...')
-        : null;
-  }
+  // Paytm webview flow disabled — donations/subscriptions now go through
+  // openCCAvenueForDonation() / openCCAvenueForSubscription() only.
+  // void openPaytmWebView(context) async {
+  //   setState(() {
+  //     loading = true;
+  //     isClick = true;
+  //   });
+  //   String docid = FirebaseFirestore.instance.collection("donations").doc().id;
+  //   if (widget.isSub) {
+  //     await subscriptionPending(docid);
+  //   } else {
+  //     await donationPending(docid);
+  //   }
+  //   Navigator.pop(context);
+  //   var newvalue = await Navigator.push(
+  //     context,
+  //     CupertinoPageRoute(
+  //       builder: (context) => PaytmWebViews(
+  //         isSub: widget.isSub,
+  //         txnid: docid,
+  //         productinfo: widget.donName,
+  //         amount: selectedAmount,
+  //       ),
+  //     ),
+  //   );
+  //
+  //   if (mounted) {
+  //     setState(() {
+  //       isClick = false;
+  //       loading = false;
+  //     });
+  //   }
+  //
+  //   print("clicked : $isClick");
+  //   debugPrint('my payment status 2 : $newvalue');
+  //   newvalue == 'Success'
+  //       ? Fluttertoast.showToast(msg: 'Payment succesfully...')
+  //       : newvalue == 'Failed'
+  //       ? Fluttertoast.showToast(msg: 'Payment Failed...')
+  //       : newvalue == 'Cancelled'
+  //       ? Fluttertoast.showToast(msg: 'Payment Canceled...')
+  //       : null;
+  // }
 
   void openCCAvenueForSubscription(context) {
     setState(() {
@@ -356,25 +362,26 @@ class _DonateByPaytmState extends State<DonateByPaytm> {
         : null;
   }
 
-  Future<void> subscriptionPending(docId) async {
-    var data = {
-      "createdAt": DateTime.now(),
-      "magazineName": widget.magName,
-      "payment": {"details": {}, "mode": "paytm", "status": "pending"},
-      "subscription": {"id": widget.subId, "name": widget.subName},
-      "user": {
-        "address": widget.address,
-        "name": widget.name,
-        "email": widget.email,
-        "phoneNo": widget.phoneNo,
-      },
-    };
-
-    await FirebaseFirestore.instance
-        .collection('subscriptions')
-        .doc(docId)
-        .set(data);
-  }
+  // Only used by the disabled Paytm flow (openPaytmWebView above).
+  // Future<void> subscriptionPending(docId) async {
+  //   var data = {
+  //     "createdAt": DateTime.now(),
+  //     "magazineName": widget.magName,
+  //     "payment": {"details": {}, "mode": "paytm", "status": "pending"},
+  //     "subscription": {"id": widget.subId, "name": widget.subName},
+  //     "user": {
+  //       "address": widget.address,
+  //       "name": widget.name,
+  //       "email": widget.email,
+  //       "phoneNo": widget.phoneNo,
+  //     },
+  //   };
+  //
+  //   await FirebaseFirestore.instance
+  //       .collection('subscriptions')
+  //       .doc(docId)
+  //       .set(data);
+  // }
 
   @override
   Widget build(BuildContext context) {

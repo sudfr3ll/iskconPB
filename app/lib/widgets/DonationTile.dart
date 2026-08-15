@@ -9,11 +9,12 @@ import 'package:iskcon/widgets/webview.dart';
 import 'package:iskcon/screens/Donate/donate_by_paytm.dart';
 
 List paymentOptions = [
-  {
-    'name': 'Paytm',
-    'icon': 'assets/images/paytm_icon.png',
-    'code': 1,
-  },
+  // Paytm disabled — routed through the Card/NetBanking (CCAvenue) webview instead.
+  // {
+  //   'name': 'Paytm',
+  //   'icon': 'assets/images/paytm_icon.png',
+  //   'code': 1,
+  // },
   {
     'name': 'Debit & Credit Card',
     'icon': 'assets/images/CD_card_icon.png',

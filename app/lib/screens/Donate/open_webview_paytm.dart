@@ -1,3 +1,8 @@
+// Paytm payment webview — disabled. Donations/subscriptions now go through
+// the Card/NetBanking (CCAvenue) webview in lib/widgets/webview.dart and
+// lib/screens/Subscription/SubscriptionWebView.dart instead.
+// Kept here (commented) for reference only; not imported anywhere.
+/*
 import 'dart:async';
 
 import 'package:flutter/material.dart';
@@ -117,31 +122,10 @@ class _PaytmWebViewsState extends State<PaytmWebViews> {
                     this.progress = progress / 100;
                   });
                 },
-
-                // javascriptChannels: <JavascriptChannel>{
-                //   JavascriptChannel(
-                //     name: 'messageHandler',
-                //     onMessageReceived: (JavascriptMessage message) {
-                //       const script = "document.getElementById('paymentSubmit')";
-                //       _webViewController?.runJavascript(script);
-                //     },
-                //   )
-                // },
-                // onWebViewCreated: (WebViewController webViewController) async {
-                //   _webViewController = webViewController;
-                //   String fileContent =
-                //       await rootBundle.loadString('assets/images/index.html');
-                //   _webViewController?.loadUrl(Uri.dataFromString(fileContent,
-                //           mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
-                //       .toString());
-                //   // _webViewController!.loadRequest(WebViewRequest(
-                //   //   uri: Uri.parse('https://test.payu.in/_payment'),
-                //   //   method: WebViewRequestMethod.post,
-                //   // ));
-                // },
               ),
             ),
           ])),
     );
   }
 }
+*/

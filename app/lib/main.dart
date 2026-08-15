@@ -1,6 +1,5 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers
 
-import 'package:audio_service/audio_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -10,25 +9,15 @@ import 'package:iskcon/constants/provider.dart';
 import 'package:iskcon/routes/routes_view.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:iskcon/widgets/customBottomNav.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:uuid/uuid.dart';
 import 'screens/splashScreen.dart';
 
-late AudioHandler audioHandler;
-
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
-
-  await JustAudioBackground.init(
-    androidNotificationChannelId:
-        'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-  );
 
   await FlutterDownloader.initialize(
     debug: true,

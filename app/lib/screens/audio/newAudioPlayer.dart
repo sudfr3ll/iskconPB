@@ -12,7 +12,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:iskcon/screens/audio/audioplaylist.dart';
 import 'package:iskcon/widgets/customAppBar.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:just_audio_background/just_audio_background.dart';
 import 'package:marquee/marquee.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rxdart/rxdart.dart';
@@ -20,6 +19,12 @@ import 'dart:isolate';
 import 'dart:ui';
 
 import 'package:shared_preferences/shared_preferences.dart';
+
+class TrackTag {
+  final String id;
+  final String title;
+  const TrackTag({required this.id, required this.title});
+}
 
 class MyAudioApp extends StatelessWidget {
   final String title;
@@ -148,11 +153,9 @@ class _MainScreenState extends State<MainScreen> {
     _playlist = ConcatenatingAudioSource(
         children: List<AudioSource>.generate(widget.data.length, (index) {
       return AudioSource.uri(Uri.parse(widget.data[index]['url']),
-          tag: MediaItem(
+          tag: TrackTag(
             id: '${widget.index}',
-            // album: widget.data[index]['chapter'],
             title: widget.data[index]['title'],
-            // artUri: Uri.parse(widget.data[index]['coverImage']),
           ));
     })
         //  [
@@ -327,7 +330,7 @@ class _MainScreenState extends State<MainScreen> {
                   if (state?.sequence.isEmpty ?? true) {
                     return const SizedBox();
                   }
-                  final metadata = state!.currentSource!.tag as MediaItem;
+                  final metadata = state!.currentSource!.tag as TrackTag;
                   return Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
