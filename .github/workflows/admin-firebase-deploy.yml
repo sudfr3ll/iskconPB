@@ -1,0 +1,65 @@
+name: Deploy Admin to Firebase Hosting
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'admin/**'
+      - '.github/workflows/admin-firebase-deploy.yml'
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: admin
+
+    steps:
+
+      # --------------------------------------------------
+      # Checkout repository
+      # --------------------------------------------------
+      - name: Checkout
+        uses: actions/checkout@v4
+
+
+      # --------------------------------------------------
+      # Node.js
+      # --------------------------------------------------
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: admin/package-lock.json
+
+
+      # --------------------------------------------------
+      # Install dependencies
+      # --------------------------------------------------
+      - name: Install Dependencies
+        run: npm ci
+
+
+      # --------------------------------------------------
+      # Build (production, outputs to dist/admin)
+      # --------------------------------------------------
+      - name: Build
+        run: npm run build
+
+
+      # --------------------------------------------------
+      # Deploy to Firebase Hosting (target: iskon-dev-admin)
+      # --------------------------------------------------
+      - name: Deploy to Firebase Hosting
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BWI_ISKON_DEV }}'
+          projectId: bwi-iskon-dev
+          target: iskon-dev-admin
+          channelId: live
+          entryPoint: admin
